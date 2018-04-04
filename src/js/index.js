@@ -17,9 +17,9 @@ let store = Redux.applyMiddleware(thunkMiddleware, logger)(Redux.createStore)(re
 
 let connectState = state => ({state});
 let connectDispatch = dispatch => ({
-    dispatch: {
-        launch: payload => dispatch(actions.launch(payload)),
-    },
+  dispatch: {
+    launch: payload => dispatch(actions.launch(payload)),
+  },
 });
 
 let Provider = ReactRedux.Provider;

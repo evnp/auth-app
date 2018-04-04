@@ -8,8 +8,11 @@
     "url": "https://github.com/evnp/react-redux-template"
   },
   "dependencies": {
+    "@firebase/app": "^0.1.10",
+    "@firebase/firestore": "^0.3.7",
     "babel-polyfill": "^6.7.2",
     "babel-runtime": "^6.6.1",
+    "firebase": "^4.12.1",
     "jquery": "^2.2.1",
     "lodash": "^4.6.1",
     "react": "^0.14.7",
