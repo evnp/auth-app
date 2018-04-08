@@ -5,7 +5,7 @@ import Card from './card';
 
 import '../../style/components/root.styl';
 
-export default class Root extends PureRenderComponent {
+export default class extends PureRenderComponent {
   render = () =>
     <div className="root-component">
       <Card {...this.props} />
