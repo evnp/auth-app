@@ -2,12 +2,9 @@ import _ from 'lodash';
 import * as util from './utilities';
 
 export const ACTIONS = util.mapToObject([
-  'LAUNCH',
+  'CHANGE_USER',
 ]);
 
-export function launch(payload) {
-  return {
-    type: ACTIONS.LAUNCH,
-    payload,
-  };
+export function changeUser(user=null) {
+  return {type: ACTIONS.CHANGE_USER, user};
 }

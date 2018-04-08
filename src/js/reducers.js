@@ -1,18 +1,19 @@
 import { ACTIONS } from './actions';
 
-export const initial_state = {
-  payload: 0,
+export const initialState = {
+  loadingAuthState: true,
+  user: null,
 };
 
-export function reducer(state=initial_state, action) {
+export function reducer(state=initialState, action) {
   let {
     type,
-    payload,
+    user,
   } = action;
 
   switch (type) {
-    case ACTIONS.LAUNCH:
-      return {...state, payload};
+    case ACTIONS.CHANGE_USER:
+      return {...state, user, loadingAuthState: false};
     default:
       return state;
   }

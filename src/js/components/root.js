@@ -1,13 +1,13 @@
 import React from 'react';
 
 import PureRenderComponent from './pure-render';
-import Card from './card';
+import App from './app';
 
 import '../../style/components/root.styl';
 
 export default class extends PureRenderComponent {
   render = () =>
-    <div className="root-component">
-      <Card {...this.props} />
+    <div className="app-component">
+      <App {...this.props} />
     </div>
 }

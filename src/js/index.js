@@ -4,29 +4,31 @@ import * as Redux from 'redux';
 import * as ReactRedux from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
+import firebase from 'firebase';
 
-import { reducer } from './reducers';
+import {reducer} from './reducers';
 import * as actions from './actions';
 
 import Root from './components/root';
+import './firebase';
 
 import '../style/index.styl';
 
-let logger = createLogger();
-let store = Redux.applyMiddleware(thunkMiddleware, logger)(Redux.createStore)(reducer);
+const logger = createLogger();
+const store = Redux.applyMiddleware(thunkMiddleware, logger)(Redux.createStore)(reducer);
 
-let connectState = state => ({state});
-let connectDispatch = dispatch => ({
+const connectState = state => ({state});
+const connectDispatch = dispatch => ({
   dispatch: {
-    launch: payload => dispatch(actions.launch(payload)),
+    changeUser: user => dispatch(actions.changeUser(user)),
   },
 });
 
-let Provider = ReactRedux.Provider;
-let ConnectedRoot = ReactRedux.connect(connectState, connectDispatch)(Root);
-let provider = <Provider store={store}><ConnectedRoot/></Provider>;
+const Provider = ReactRedux.Provider;
+const ConnectedRoot = ReactRedux.connect(connectState, connectDispatch)(Root);
+const provider = <Provider store={store}><ConnectedRoot/></Provider>;
 
-let container = document.createElement('div');
+const container = document.createElement('div');
 container.className = 'react-container';
 document.body.appendChild(container);
 

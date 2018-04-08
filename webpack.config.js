@@ -26,7 +26,7 @@ const stylusLoader = {
 module.exports = (env={}, argv) => {
   const minified = !!argv[`optimize-minimize`];
   return {
-    devtool: `eval-cheap-module-source-map`,
+    devtool: `eval-source-map`,
     entry: [
       `babel-polyfill`,
       `./src/js/index.js`,
@@ -44,7 +44,6 @@ module.exports = (env={}, argv) => {
         },
         { // Style Loader - bundle .styl imports in .js files into a single .css file
           test: /\.styl$/,
-          include: __dirname + `/src/style`,
           use: argv.mode === `production` ? // only use the ExtractTextPlugin in production
             ExtractTextPlugin.extract({
               fallback: `style-loader`,
@@ -60,20 +59,27 @@ module.exports = (env={}, argv) => {
               stylusLoader,
             ],
         },
+        { // CSS Loader - bundle .css imports in .js files into a single .css file
+          test: /\.css$/,
+          use: argv.mode === `production` ? // only use the ExtractTextPlugin in production
+            ExtractTextPlugin.extract({
+              fallback: `style-loader`,
+              use: [`css-loader`],
+            })
+            :
+            [
+              `style-loader`,
+              `css-loader`,
+            ],
+        },
         { // Image Loader - resolve "url(...)" statements in .css files to images
           test: /\.(png|jpg|svg)$/,
-          include: __dirname + `/src/images`,
           use: {
             loader: `url-loader`,
             options: {
               limit: 8192, // 8kb
             },
           },
-        },
-        { // JSON Loader - resolve .json imports in .js files to JavaScript objects
-          test: /\.json$/,
-          include: __dirname + `/src/json`,
-          use: [`json-loader`],
         },
       ],
     },
